@@ -30,13 +30,13 @@ This is a simple script that can be installed under a cron job and utilized to u
 Add the following env vars to ~/.profile
 
 ```export NEAR_NETWORK=<network>```
-
-```export TWILIO_MESSAGING_SERVICE_SID=<your_twilio_messaging_service_sid>```
-```export TWILIO_ACCOUNT_SID=<your_twilio_account_sid>```
-```export TWILIO_AUTH_TOKEN=<your_twilio_auth_token>```
-```export TWILIO_NUMBER_TO_SEND=<number you want the message sent to>``` 
-```export TWILIO_NUMBER=<Number in your twilio account>```
-
+```
+export TWILIO_MESSAGING_SERVICE_SID=<your_twilio_messaging_service_sid>
+export TWILIO_ACCOUNT_SID=<your_twilio_account_sid>
+export TWILIO_AUTH_TOKEN=<your_twilio_auth_token>
+export TWILIO_NUMBER_TO_SEND=<number you want the message sent to> 
+export TWILIO_NUMBER=<Number in your twilio account>
+```
 Install jq
 
 ```sudo apt-get install jq```
