@@ -37,15 +37,15 @@ export TWILIO_AUTH_TOKEN=<your_twilio_auth_token>
 export TWILIO_NUMBER_TO_SEND=<number you want the message sent to> 
 export TWILIO_NUMBER=<Number in your twilio account>
 ```
-Install jq
+**Install jq**
 
 ```sudo apt-get install jq```
 
-Install script to home directory
+**Install script to home directory**
 
 ```git clone https://github.com/abellinii/near-ci.git```
 
-Set cron job to run the script every hour
+**Set cron job to run the script every hour**
 
 ```echo "@hourly        script --return --quiet --append --command \"cd /home/$USER/near-ci && updateNear.sh 2>&1\" /home/$USER/near-logs/update.log" | crontab -```
 
