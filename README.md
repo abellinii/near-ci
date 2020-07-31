@@ -53,7 +53,7 @@ export TWILIO_NUMBER=<Number in your twilio account>
 
 **Set cron job to run the script every hour**
 
-```echo "@hourly        script --return --quiet --append --command \"cd /home/$USER/near-ci && updateNear.sh 2>&1\" /home/$USER/near-logs/update.log" | crontab -```
+```echo "@hourly        script --return --quiet --append --command \"cd /home/$USER/near-ci && ./updateNear.sh 2>&1\" /home/$USER/near-ci/update.log" | crontab -```
 
 ```sudo chmod +x /home/$USER/near-ci/updateNear.sh```
 

@@ -13,7 +13,7 @@
 source ~/.bash_profile
 source ~/.profile
 source $PATH
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:/usr/bin:/bin:/usr/sbin:/sbin:/$HOME/
+#PATH=/usr/local/bin:/usr/local/sbin:~/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/ubuntu/monitoringTools
 
 
 
