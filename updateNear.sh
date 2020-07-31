@@ -6,7 +6,7 @@
 
 ip=$(curl ifconfig.me)
 network=$NEAR_NETWORK
-
+msg="msg"
 diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:3030/status | jq .version)
 
 if [ $? -ne 0 ]; then
@@ -23,22 +23,30 @@ if [ $? -ne 0 ]; then
 
     #Test new release
     nearup localnet --nodocker --binary-path /home/$USER/nearcore/target/debug
+    echo "Testing localnet"
 
-    curl $ip:3001
-    curl $ip:3002
-    curl $ip:3003
-    curl $ip:3004
+    for count in {0..4}
+    diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:303"$count"/status | jq .version)
+    if [ $? -ne 0 ]
+    then
+        echo "Node $count Operational"
+    else    
+        msg="Node Upgade failed - Test Failed: Node $count  Not Operational"
+        echo $msg
+        twilio.sh $msg
+        nearup stop
+        exit 1
+    fi
+    done
 
-
-
-
-    #Start the validator back up if operation was successfull
-    nearup betanet --nodocker --binary-path /home/$USER/nearcore/target/release/
+    echo "Testing localnet complete"
+    nearup stop
+    nearup betanet --binary-path /home/$USER/nearcore/target/release/
 
     
 
     #Configure msg text
-
+    msg="Validator update with new $network $versionStripped"
 
     #Send msg to phone about the status of the update 
     twilio.sh "$msg"

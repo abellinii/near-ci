@@ -23,6 +23,12 @@ This is a simple script that can be installed under a cron job and utilized to u
 
 ```apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm```
 
+```curl https://sh.rustup.rs -sSf | sh -s -- -y```
+
+```source $HOME/.cargo/env```
+
+
+
 ## Installation
 
 ### Set environment variables for Twilio and network you are using
