@@ -21,7 +21,7 @@ This is a simple script that can be installed under a cron job and utilized to u
 
 ```sudo apt update```
 
-```apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm```
+```sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm```
 
 ```curl https://sh.rustup.rs -sSf | sh -s -- -y```
 
@@ -47,6 +47,15 @@ export TWILIO_NUMBER=<Number in your twilio account>
 
 ```sudo apt-get install jq```
 
+**Install nearup**
+
+```sudo apt-get --assume-yes install python3 git curl```
+
+```curl --proto "=https" --tlsv1.2 -sSfL https://up.near.dev | python3```
+
+```source $HOME/.nearup/env```
+
+
 **Install script to home directory**
 
 ```git clone https://github.com/abellinii/near-ci.git```
@@ -56,6 +65,16 @@ export TWILIO_NUMBER=<Number in your twilio account>
 ```echo "@hourly        script --return --quiet --append --command \"cd /home/$USER/near-ci && ./updateNear.sh 2>&1\" /home/$USER/near-ci/update.log" | crontab -```
 
 ```sudo chmod +x /home/$USER/near-ci/updateNear.sh```
+
+```sudo chmod +x /home/$USER/near-ci/twilio.sh```
+
+**Add the new path to profile**
+
+```nano ~/.profile```
+
+Add to file
+
+```
 
 
 

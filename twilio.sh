@@ -9,11 +9,6 @@
 #   - Accepts 1 paramter that is the message you would like to send
 #   - Send the message using twilio
 
-#load env vars
-source ~/.bash_profile
-source ~/.profile
-source $PATH
-#PATH=/usr/local/bin:/usr/local/sbin:~/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/ubuntu/monitoringTools
 
 
 
