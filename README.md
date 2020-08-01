@@ -74,7 +74,9 @@ export TWILIO_NUMBER=<Number in your twilio account>
 
 Add to file
 
-```
+```export PATH="$HOME/near-ci:$PATH"```
+
+```source ~/.profile```
 
 
 
