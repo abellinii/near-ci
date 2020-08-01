@@ -35,8 +35,7 @@ if [ $? -ne 0 ]; then
         then
             echo "Node $count Operational"
         else
-            echo $(curl -s https://rpc."$network".near.org/status | jq .version)
-            echo $(curl -s http://127.0.0.1:303"$count"/status | jq .version)
+            cd && mv /home/$USER/nearcore.bak /home/$USER/nearcore
             msg="Node Upgade failed - Test Failed: Node $count  Not Operational"
             echo $msg
             ./twilio.sh "$msg"
