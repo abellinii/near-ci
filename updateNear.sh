@@ -40,13 +40,14 @@ if [ $? -ne 0 ]; then
             echo $msg
             ./twilio.sh "$msg"
             nearup stop
+            nearup "$network" --binary-path /home/$USER/nearcore/target/release/ --nodocker
             exit 1
         fi
     done
 
     echo "Testing localnet complete"
     nearup stop
-    nearup betanet --binary-path /home/$USER/nearcore/target/release/ --nodocker
+    nearup "$network" --binary-path /home/$USER/nearcore/target/release/ --nodocker
 
 
     #Configure msg text
