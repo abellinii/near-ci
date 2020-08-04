@@ -1,4 +1,8 @@
-# near-ci
+# near-ci for Docker
+
+### Notes
+
+This script is used in conjunction with [masknetgoal634's](https://github.com/masknetgoal634) implementation of Github actions to build the new docker image [here](https://github.com/masknetgoal634/nearcore-deploy). This must first be installed and used for this script to work. It is also for the implentation of [near-terraform](https://github.com/abellinii/near-terraform) 
 
 ## Overview
 
@@ -42,6 +46,7 @@ export TWILIO_ACCOUNT_SID=<your_twilio_account_sid>
 export TWILIO_AUTH_TOKEN=<your_twilio_auth_token>
 export TWILIO_NUMBER_TO_SEND=<number you want the message sent to> 
 export TWILIO_NUMBER=<Number in your twilio account>
+export NEARCORE_DOCKER_IMAGE=<your docker image>
 ```
 **Install jq**
 

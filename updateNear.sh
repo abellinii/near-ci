@@ -7,6 +7,7 @@
 source ~/.profile
 ip=$(curl ifconfig.me)
 network=$NEAR_NETWORK
+image=$NEARCORE_DOCKER_IMAGE
 msg="msg"
 USER=$(whoami)
 echo "Checking for updates"
@@ -16,46 +17,29 @@ if [ $? -ne 0 ]; then
     echo "start update";
     version=$(curl -s https://rpc."$network".near.org/status | jq .version.version)
     strippedversion=$(echo "$version" | awk -F "\"" '{print $2}' | awk -F "-" '{print $1}')
-    rm -rf /home/$USER/nearcore.bak
-    mv /home/$USER/nearcore /home/$USER/nearcore.bak
-    git clone --branch $strippedversion https://github.com/nearprotocol/nearcore.git /home/$USER/nearcore
-    cd /home/$USER/nearcore
-    make release
+    
     nearup stop
-
+    nearup "$network" --image "$image"
 
     #Test new release
-    nearup localnet  --binary-path /home/$USER/nearcore/target/release
-    echo "Testing localnet"
-    sleep 4
-    for count in {0..3}
-    do
-        diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:303"$count"/status | jq .version)
-        if [ $? -eq 0 ]
-        then
-            echo "Node $count Operational"
-        else
-            cd && mv /home/$USER/nearcore.bak /home/$USER/nearcore
-            msg="Node Upgade failed - Test Failed: Node $count  Not Operational"
-            echo $msg
-            ./twilio.sh "$msg"
-            nearup stop
-            nearup "$network" --binary-path /home/$USER/nearcore/target/release/ --nodocker
-            exit 1
-        fi
-    done
 
-    echo "Testing localnet complete"
-    nearup stop
-    nearup "$network" --binary-path /home/$USER/nearcore/target/release/ --nodocker
+    echo "Testing image is updated"
+    diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:303"$count"/status | jq .version)
+    if [ $? -eq 0 ]
+    then
+        msg="Validator update with new $network $versionStripped"
+        ./twilio.sh "$msg"
+        echo "Validator update with new $network $versionStripped"
+    else
+        cd && mv /home/$USER/nearcore.bak /home/$USER/nearcore
+        msg="Node Upgade failed - Still running old version - Check setup immediately"
+        echo $msg
+        ./twilio.sh "$msg"
+        exit 1
+    fi
+    
 
+    echo "Upgrade complete"
 
-    #Configure msg text
-    msg="Validator update with new $network $versionStripped"
-
-    #Send msg to phone about the status of the update 
-    ./twilio.sh "$msg"
-
-    echo "done"
 
 fi
