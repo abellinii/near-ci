@@ -28,13 +28,13 @@ if [ $? -ne 0 ]; then
     if [ $? -eq 0 ]
     then
         msg="Validator update with new $network $versionStripped"
-        ./twilio.sh "$msg"
+        twilio.sh "$msg"
         echo "Validator update with new $network $versionStripped"
     else
         cd && mv /home/$USER/nearcore.bak /home/$USER/nearcore
         msg="Node Upgade failed - Still running old version - Check setup immediately"
         echo $msg
-        ./twilio.sh "$msg"
+        twilio.sh "$msg"
         exit 1
     fi
     
