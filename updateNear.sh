@@ -1,4 +1,4 @@
-##!/bin/bash
+#!/bin/bash
 
 
 #Bash script to place in a cron job on local server to check for updates of the lastest near version
