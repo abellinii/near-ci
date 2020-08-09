@@ -12,7 +12,7 @@ msg="msg"
 USER=$(whoami)
 echo "Checking for updates"
 
-diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:3030/status | jq .version)
+diff <(curl -s https://rpc."$network".near.org/status | jq .version.version) <(curl -s http://127.0.0.1:3030/status | jq .version.version)
 if [ $? -ne 0 ]; then
     echo "start update";
     version=$(curl -s https://rpc."$network".near.org/status | jq .version.version)
