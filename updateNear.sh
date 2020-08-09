@@ -24,7 +24,7 @@ if [ $? -ne 0 ]; then
     #Test new release
 
     echo "Testing image is updated"
-    diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:303"$count"/status | jq .version)
+    diff <(curl -s https://rpc."$network".near.org/status | jq .version.version) <(curl -s http://127.0.0.1:303"$count"/status | jq .version.version)
     if [ $? -eq 0 ]
     then
         msg="Validator update with new $network $versionStripped"
