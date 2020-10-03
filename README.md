@@ -13,19 +13,19 @@ This is a simple script that can be installed under a cron job and utilized to u
 
 [jq](https://stedolan.github.io/jq/) for parsing json. jq is a lightweight and flexible command-line JSON processor.
 
-[Nearup](https://github.com/near/nearup) is NEAR's public scripts to launch near betanet and testnet node. This is installed on provisioning.
-
 [Twilio](https://www.twilio.com/) is a programmable messaging service. This will alert the node owner when a release has been deployed and the node was upgraded either successfully or unsuccessfully. You will need to sign up for an account
 
 ## Dependencies(if machine has never compiled nearcore previously)
 
 ```sudo apt update```
 
-```sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm```
+```sudo apt install -y python3 git curl libclang-dev build-essential llvm runc gcc g++ unattended-upgrades make clang pkg-config libssl-dev libudev-dev g++ g++-multilib lib32stdc++6-7-dbg libx32stdc++6-7-dbg cmake```
 
 ```curl https://sh.rustup.rs -sSf | sh -s -- -y```
 
 ```source $HOME/.cargo/env```
+
+```rustup default nightly```
 
 
 
@@ -47,13 +47,6 @@ export TWILIO_NUMBER=<Number in your twilio account>
 
 ```sudo apt-get install jq```
 
-**Install nearup**
-
-```sudo apt-get --assume-yes install python3 git curl```
-
-```curl --proto "=https" --tlsv1.2 -sSfL https://up.near.dev | python3```
-
-```source $HOME/.nearup/env```
 
 
 **Install script to home directory**
