@@ -33,10 +33,10 @@ if [ $? -eq 0 ]; then
         if [ $? -eq 0 ]; then
         echo "new build was successfull, run test nodes"
 
-        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node0 run
-        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node1 run --boot-nodes $nodekey@127.0.0.1:24550
-        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node2 run --boot-nodes $nodekey@127.0.0.1:24550
-        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node3 run --boot-nodes $nodekey@127.0.0.1:24550
+        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node0 run &> /dev/null &
+        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node1 run --boot-nodes $nodekey@127.0.0.1:24550 &> /dev/null &
+        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node2 run --boot-nodes $nodekey@127.0.0.1:24550 &> /dev/null &
+        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-ci/localnet/localnet-node3 run --boot-nodes $nodekey@127.0.0.1:24550 &> /dev/null &
         sleep 10
         echo "run test"        
         for count in {0..3}
