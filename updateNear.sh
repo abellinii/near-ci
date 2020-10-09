@@ -17,11 +17,11 @@ if [ $? -eq 0 ]; then
     sudo apt-get update
     sudo apt-get --assume-yes upgrade
     sudo apt-get --assume-yes dist-upgrade
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source /root/.cargo/env
-    rustup component add clippy-preview
-    rustup default nightly
-    [ -d /home/$USER/nearcore.new ] && rm -rf /home/$USER/nearcore.new
+    sudo rustup component add clippy-preview
+    sudo rustup default nightly
+    [ -d /home/$USER/nearcore.new ] && sudo rm -rf /home/$USER/nearcore.new
     version=$(curl -s https://rpc.$network.near.org/status | jq .version.version)
     strippedversion=$(echo "$version" | awk -F "\"" '{print $2}' | awk -F "-" '{print $1}')
     mkdir /home/$USER/nearcore.new
