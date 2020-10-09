@@ -17,7 +17,7 @@ if [ $? -eq 0 ]; then
     sudo apt-get update
     sudo apt-get --assume-yes upgrade
     sudo apt-get --assume-yes dist-upgrade
-    sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source ~/.profile
     rustup component add clippy-preview
     rustup default nightly
@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
     mkdir /home/$USER/nearcore.new
     git clone --branch $strippedversion https://github.com/nearprotocol/nearcore.git /home/$USER/nearcore.new
     cd /home/$USER/nearcore.new
-    sudo make release
+    make release
 
         #if make was succesfully test a new node
         if [ $? -eq 0 ]; then
