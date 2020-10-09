@@ -12,7 +12,7 @@ nodekey=$(cat /home/$USER/near-ci/localnet/localnet-node0/validator_key.json | j
 diff <(curl -s https://rpc.$network.near.org/status | jq .version) <(curl -s http://127.0.0.1:3030/status | jq .version)
 
 #start update if local version is different
-if [ $? -eq 0 ]; then
+if [ $? -ne 0 ]; then
     echo "start update";
     sudo apt-get update
     sudo apt-get --assume-yes upgrade
@@ -68,8 +68,9 @@ if [ $? -eq 0 ]; then
         pkill neard
 
         echo 'test is succesfull, deploy a new node'
-        mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
-        mv /home/$USER/nearcore.new /home/$USER/nearcore
+        mkdir /home/$USER/nearcore.bak
+        sudo mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
+        sudo mv /home/$USER/nearcore.new /home/$USER/nearcore
         cd /home/$USER/
         nearcore/target/release/neard run 2>&1|tee -a validator.log
 
