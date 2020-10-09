@@ -1,12 +1,12 @@
 #!/bin/bash
 
 source ~/.profile
-source $HOME/.cargo/env
-ip=$(curl ifconfig.me)
 network=$NEAR_NETWORK
 msg="msg"
 USER=$(whoami)
 nodekey=$(cat /home/$USER/near-ci/localnet/localnet-node0/validator_key.json | jq .public_key | tr -d '"')
+
+
 
 #check node version diff
 diff <(curl -s https://rpc.$network.near.org/status | jq .version) <(curl -s http://127.0.0.1:3030/status | jq .version)
@@ -14,6 +14,12 @@ diff <(curl -s https://rpc.$network.near.org/status | jq .version) <(curl -s htt
 #start update if local version is different
 if [ $? -eq 0 ]; then
     echo "start update";
+    sudo apt-get update
+    sudo apt-get --assume-yes upgrade
+    sudo apt-get --assume-yes dist-upgrade
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source /root/.cargo/env
+    rustup component add clippy-preview
     rustup default nightly
     [ -d /home/$USER/nearcore.new ] && rm -rf /home/$USER/nearcore.new
     version=$(curl -s https://rpc.$network.near.org/status | jq .version.version)
@@ -35,7 +41,7 @@ if [ $? -eq 0 ]; then
         echo "run test"        
         for count in {0..3}
         do
-            diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:305"$count"/status | jq .version)
+            diff <(curl -s https://rpc."$network".near.org/status | jq .version) <(curl -s http://127.0.0.1:307"$count"/status | jq .version)
             if [ $? -eq 0 ]
             then
                 echo "Node $count Operational"
