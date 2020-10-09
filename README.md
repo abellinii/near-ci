@@ -35,8 +35,8 @@ This is a simple script that can be installed under a cron job and utilized to u
 
 Add the following env vars to ~/.profile
 
-```export NEAR_NETWORK=<network>```
 ```
+export NEAR_NETWORK=<network>
 export TWILIO_MESSAGING_SERVICE_SID=<your_twilio_messaging_service_sid>
 export TWILIO_ACCOUNT_SID=<your_twilio_account_sid>
 export TWILIO_AUTH_TOKEN=<your_twilio_auth_token>
@@ -55,7 +55,7 @@ export TWILIO_NUMBER=<Number in your twilio account>
 
 **Set cron job to run the script every hour**
 
-```echo "@hourly        script --return --quiet --append --command \"cd /home/$USER/near-ci && ./updateNear.sh 2>&1\" /home/$USER/near-ci/update.log" | crontab -```
+```echo "@daily        script --return --quiet --append --command \"cd /home/$USER/near-ci && ./updateNear.sh 2>&1\" /home/$USER/near-ci/update.log" | crontab -```
 
 ```sudo chmod +x /home/$USER/near-ci/updateNear.sh```
 
@@ -67,7 +67,7 @@ export TWILIO_NUMBER=<Number in your twilio account>
 
 Add to file
 
-```export PATH="$HOME/near-ci:$PATH"```
+```export PATH="$HOME/near-ci:$HOME/.cargo:$PATH"```
 
 ```source ~/.profile```
 
